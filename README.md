@@ -6,5 +6,5 @@ Install angular cli 13 or higher and node 18 or higher
 
 go to the workspace and run the below commands
 
-1. npm i (for node dependencies)
+1. npm install (for node dependencies)
 2. ng serve -o ("-o" will automatically open localhost on the browser)
