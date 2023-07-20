@@ -1,0 +1,90 @@
+<div class="text-center mb-3">
+  <button type="button" class="btn btn-primary customBtn" (click)="showTodoForm()">
+    Add New Todo
+  </button>
+</div>
+
+<div
+  class="container shadow-lg p-3 mb-5 bg-white rounded" *ngIf="isshowTodoForm">
+  <form [formGroup]="todoForm" (ngSubmit)="addNewTodo()">
+    <div class="form-group">
+      <label for="todoName">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="todo.name"
+        formControlName="todoName"
+        [ngClass]="{'is-invalid':submitted && todoForm.controls['todoName'].errors}"
+        id="todoName"
+        name="todoName"
+        placeholder="Enter Todo Name"
+      />
+      <div *ngIf="submitted && todoForm.controls['todoName'].errors" class="text-danger">
+        <p>Todo Name is Required</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="todoDesc">Description</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="todo.description"
+        formControlName="todoDesc"
+        [ngClass]="{'is-invalid':submitted && todoForm.controls['todoDesc'].errors}"
+        id="todoDesc"
+        name="todoDesc"
+        placeholder="Enter Todo Description"
+        required
+      />
+      <div *ngIf="submitted && todoForm.controls['todoDesc'].errors" class="text-danger">
+        <p>Todo Description is Required</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="todoDue">Due Date</label>
+      <div class="col-12">
+        <div class="input-group">
+          <input
+            class="form-control"
+            [(ngModel)]="todo.due"
+            formControlName="todoDue"
+            [minDate]="minDateObj"
+            placeholder="YYYY-MM-DD"
+            id="todoDue"
+            name="todoDue"
+            ngbDatepicker
+            required
+            #d="ngbDatepicker"
+          />
+          <i-bs
+            class="btn btn-outline-secondary"
+            name="calendar"
+            (click)="d.toggle()"
+          ></i-bs>
+        </div>
+        <div *ngIf="submitted && todoForm.controls['todoDue'].errors" class="text-danger">
+          <p>Todo Due date is Required</p>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="todoStatus">Status</label>
+      <input
+        type="text"
+        class="form-control"
+        id="todoStatus"
+        name="todoStatus"
+        value="Pending"
+        [disabled]="true"
+      />
+    </div>
+    <div>
+      <button type="button" class="btn btn-primary mt-3 customBtn" (click)="addNewTodo()">
+        Submit
+      </button>
+      <button type="button" class="btn btn-danger mt-3 ml-3 customBtnDanger" (click)="hideTodoForm()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

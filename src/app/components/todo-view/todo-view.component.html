@@ -1,0 +1,62 @@
+<div class="container">
+  <div *ngIf="todos.length === 0; else showTodo">
+    <div class="h3 text-center">No To-Do Found</div>
+  </div>
+  <ng-template #showTodo>
+    <table class="table table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th class="col-md-3">Status</th>
+          <th class="col-md-3">Todo Name</th>
+          <th class="col-md-3">Due</th>
+          <th>View</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of todos">
+          <td>
+            <div class="form-check">
+              <input
+                mdbCheckbox
+                class="form-check-input"
+                type="checkbox"
+                value="e.checked"
+                id="flexCheckDefault"
+                [checked]="e.checked == 1 ? true : false"
+                (change)="todoStatusChange(e.id)"
+              />
+              <label class="form-check-label" for="flexCheckDefault">
+                {{ e.checked == 0 ? 'Pending' : 'Completed' }}
+              </label>
+            </div>
+          </td>
+          <td>{{ e.name }}</td>
+          <td>{{ e.due }}</td>
+          <td>
+            <i-bs
+              name="eye-fill"
+              class="cursor-pointer"
+              (click)="viewTodo(e.id)"
+            ></i-bs>
+          </td>
+          <td>
+            <i-bs
+              name="pen-fill"
+              class="cursor-pointer"
+              (click)="updateTodo(e.id)"
+            ></i-bs>
+          </td>
+          <td>
+            <i-bs
+              name="trash-fill"
+              class="cursor-pointer"
+              (click)="deleteTodo(e.id)"
+            ></i-bs>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-template>
+</div>

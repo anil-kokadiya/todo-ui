@@ -1,0 +1,24 @@
+<app-header></app-header>
+<div class="container">
+  <table class="table table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th class="col-md-3">ID</th>
+        <th class="col-md-3">Name</th>
+        <th class="col-md-3">Description</th>
+        <th class="col-md-3">Due</th>
+        <th class="col-md-3">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ todo.id }}</td>
+        <td>{{ todo.name }}</td>
+        <td>{{ todo.description }}</td>
+        <td>{{ todo.due }}</td>
+        <td>{{ todo.checked == '0' ? 'Pending' : 'Completed' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<app-footer></app-footer>

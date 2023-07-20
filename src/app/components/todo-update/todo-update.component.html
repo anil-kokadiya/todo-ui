@@ -1,0 +1,81 @@
+<app-header></app-header>
+<div class="h3 text-center">Update To-Do</div>
+<div class="container shadow-lg p-3 mb-5 bg-white rounded">
+  <form [formGroup]="todoForm" (ngSubmit)="todoUpdate()">
+    <div class="form-group">
+      <label for="todoName">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="todo.name"
+        formControlName="todoName"
+        [ngClass]="{'is-invalid':submitted && todoForm.controls['todoName'].errors}"
+        id="todoName"
+        name="todoName"
+        placeholder="Enter Todo Name"
+      />
+      <div *ngIf="submitted && todoForm.controls['todoName'].errors" class="text-danger">
+        <p>Todo Name is Required</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="todoDesc">Description</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="todo.description"
+        formControlName="todoDesc"
+        [ngClass]="{'is-invalid':submitted && todoForm.controls['todoDesc'].errors}"
+        id="todoDesc"
+        name="todoDesc"
+        placeholder="Enter Todo Description"
+      />
+      <div *ngIf="submitted && todoForm.controls['todoDesc'].errors" class="text-danger">
+        <p>Todo Description is Required</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="todoDue">Due Date</label>
+      <div class="col-12">
+        <div class="input-group">
+          <input
+            class="form-control"
+            [(ngModel)]="todo.due"
+            formControlName="todoDue"
+            [minDate]="minDateObj"
+            placeholder="YYYY-MM-DD"
+            id="todoDue"
+            name="todoDue"
+            ngbDatepicker
+            #d="ngbDatepicker"
+          />
+          <i-bs
+            class="btn btn-outline-secondary"
+            name="calendar"
+            (click)="d.toggle()"
+          ></i-bs>
+        </div>
+        <div *ngIf="submitted && todoForm.controls['todoDue'].errors" class="text-danger">
+          <p>Todo Due date is Required</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button
+        type="button"
+        class="btn btn-primary mx-1 mt-3 customBtnPrimary"
+        (click)="todoUpdate()"
+      >
+        Update
+      </button>
+      <button
+        type="button"
+        routerLink="/todo"
+        class="btn btn-danger mx-1 mt-3 customBtnDanger"
+      >
+        Back
+      </button>
+    </div>
+  </form>
+</div>
+<app-footer></app-footer>
